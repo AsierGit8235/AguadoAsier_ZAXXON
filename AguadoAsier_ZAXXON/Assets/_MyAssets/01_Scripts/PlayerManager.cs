@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -8,8 +9,21 @@ public class PlayerManager : MonoBehaviour
     //Input System
     MyInputActions inputActions;
 
-    //movimiento en x
+    //movimientos en axis
     float MoveX;
+    float MoveY;
+
+    //rotacion del player
+    float Rotation;
+
+    //restringimiento de movimiento
+    public float minX = -17f;
+    public float maxX = 17f;
+    public float minY = -5f;
+    public float maxY = 5f;
+
+    //velocidad de rotacion
+    float rotationSpeed = 4f;
 
     private void Awake()
     {
@@ -18,7 +32,13 @@ public class PlayerManager : MonoBehaviour
         inputActions.Player.Fire.started += _ => Shoot();
 
         inputActions.Player.MoveX.performed += ctx => MoveX = ctx.ReadValue<float>();
-        inputActions.Player.MoveX.canceled += ctx => MoveX = 0f; 
+        inputActions.Player.MoveX.canceled += _ => MoveX = 0f;
+
+        inputActions.Player.MoveY.performed += ctx => MoveY = ctx.ReadValue<float>();
+        inputActions.Player.MoveY.canceled += _ => MoveY = 0f;
+
+        inputActions.Player.Rotate.performed += ctx => Rotation = ctx.ReadValue<float>();
+        inputActions.Player.Rotate.canceled += _ => Rotation = 0f;
     }
 
     void Shoot()
@@ -47,5 +67,17 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.right * desplSpeed * Time.deltaTime);
+
+        transform.Translate(Vector3.left * desplSpeed * Time.deltaTime);
+
+        transform.Translate(Vector3.forward * rotationSpeed * Time.deltaTime * 360f);
+
+
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
+
+        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
+
+
     }
 }
