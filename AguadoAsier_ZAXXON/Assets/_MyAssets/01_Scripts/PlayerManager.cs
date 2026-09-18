@@ -13,14 +13,16 @@ public class PlayerManager : MonoBehaviour
     float MoveX;
     float MoveY;
 
+
+    //movimiento vertical
+    float MoveUp;
+    float MoveDown;
+
+    //limites del movimiento 
+    float limits = 15f;
+
     //rotacion del player
     float Rotation;
-
-    //restringimiento de movimiento
-    public float minX = -17f;
-    public float maxX = 17f;
-    public float minY = -5f;
-    public float maxY = 5f;
 
     //velocidad de rotacion
     float rotationSpeed = 4f;
@@ -41,10 +43,24 @@ public class PlayerManager : MonoBehaviour
         inputActions.Player.Rotate.canceled += _ => Rotation = 0f;
     }
 
-    void Shoot()
+    private void Update()
     {
-        print("PUUUUUM");
+        if (CheckLimits() == true)
+        {
+            MovePlayer();
+        }
+
+    bool CheckLimits()
+    {
+        bool inLimit = true;
+
+        return inLimit;
     }
+
+    void Shoot()
+        {
+            print("PUUUUUM");
+        }
 
     private void OnEnable()
     {
@@ -66,18 +82,22 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MovePlayer();
+    }
+
+
+
+    void MovePlayer()
+
+    {
         transform.Translate(Vector3.right * desplSpeed * Time.deltaTime);
+
+        transform.Translate(Vector3.up * desplSpeed * Time.deltaTime);
+
+        transform.Translate(Vector3.down * desplSpeed * Time.deltaTime);
 
         transform.Translate(Vector3.left * desplSpeed * Time.deltaTime);
 
         transform.Translate(Vector3.forward * rotationSpeed * Time.deltaTime * 360f);
-
-
-        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(transform.position.y, minY, maxY);
-
-        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
-
-
     }
 }
