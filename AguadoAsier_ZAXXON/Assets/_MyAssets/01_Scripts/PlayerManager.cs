@@ -50,17 +50,18 @@ public class PlayerManager : MonoBehaviour
             MovePlayer();
         }
 
-    bool CheckLimits()
-    {
-        bool inLimit = true;
+        bool CheckLimits()
+        {
+            bool inLimit = true;
 
-        return inLimit;
-    }
+            return inLimit;
+        }
 
-    void Shoot()
+        void Shoot()
         {
             print("PUUUUUM");
         }
+    }
 
     private void OnEnable()
     {
@@ -83,8 +84,8 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         MovePlayer();
-    }
 
+    }
 
 
     void MovePlayer()
