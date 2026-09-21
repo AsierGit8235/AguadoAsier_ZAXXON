@@ -567,6 +567,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64663903dbdc0f428a29336822bc950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
+  playerTransform: {fileID: 1332455367}
+  offsetZ: -27
+  offsetY: 5
 --- !u!114 &370636716
 MonoBehaviour:
   m_ObjectHideFlags: 0

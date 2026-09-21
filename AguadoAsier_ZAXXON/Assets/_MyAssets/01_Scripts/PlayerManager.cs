@@ -22,10 +22,15 @@ public class PlayerManager : MonoBehaviour
 
 
     //rotacion del player
-    float Rotation;
+    float Rotate;
 
     //velocidad de rotacion
     float rotationSpeed = 4f;
+
+    float maxRotation = 70f;
+    [SerializeField] float smoothTime = 0.4f;
+    private Vector3 velocity = Vector3.zero;
+    Vector3 currentRot;
 
     private void Awake()
     {
@@ -39,8 +44,8 @@ public class PlayerManager : MonoBehaviour
         inputActions.Player.MoveY.performed += ctx => MoveY = ctx.ReadValue<float>();
         inputActions.Player.MoveY.canceled += _ => MoveY = 0f;
 
-        inputActions.Player.Rotate.performed += ctx => Rotation = ctx.ReadValue<float>();
-        inputActions.Player.Rotate.canceled += _ => Rotation = 0f;
+        inputActions.Player.Rotate.performed += ctx => Rotate = ctx.ReadValue<float>();
+        inputActions.Player.Rotate.canceled += _ => Rotate = 0f;
     }
 
     private void Shoot()
@@ -50,8 +55,8 @@ public class PlayerManager : MonoBehaviour
 
     private void CheckLimits()
     {
-        float limitsX = 14;
-        float limitsY = 5; 
+        float limitsX = 14f;
+        float limitsY = 5f; 
 
 
         if (CheckLimits() == true)
@@ -107,8 +112,8 @@ public class PlayerManager : MonoBehaviour
         }
         if (CheckLimitsY() == true)
         {
-            Vector3 desplx = Vector3.right * desplSpeed * Time.deltaTime * MoveX;
-            transform.Translate(desplx, Space.World);
+            Vector3 desply = Vector3.left * desplSpeed * Time.deltaTime * MoveY;
+            transform.Translate(desply, Space.World);
         }
             transform.Translate(Vector3.right * desplSpeed * Time.deltaTime);
 
@@ -118,7 +123,17 @@ public class PlayerManager : MonoBehaviour
 
         transform.Translate(Vector3.left * desplSpeed * Time.deltaTime);
 
-        transform.Translate(Vector3.forward * rotationSpeed * Time.deltaTime * 360f);
+        transform.Translate(Vector3.forward * rotationSpeed * Time.deltaTime * -360f);
+    }
+
+    void RotatePlayer()
+    {
+        transform.eulerAngles = Vector3.forward * -maxRotation * MoveX;
+        Vector3 vectorRotZ = Vector3.forward * -60f * MoveX;
+        Vector3 vectorRotX = Vector3.right * -30f * MoveY;
+        Vector3 vectorRot = vectorRotX + vectorRotZ;
+        currentRot = Vector3.SmoothDamp(currentRot, vectorRot, ref velocity, smoothTime);
+        transform.eulerAngles = currentRot;
     }
 
     bool CheckLimitsX()
