@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,17 +10,16 @@ public class PlayerManager : MonoBehaviour
     //Input System
     MyInputActions inputActions;
 
-    //movimientos en axis
+    //movimiento en x
     float MoveX;
-    float MoveY;
 
+    //movimiento en y
+    float MoveY;
 
     //movimiento vertical
     float MoveUp;
     float MoveDown;
 
-    //limites del movimiento 
-    float limits = 15f;
 
     //rotacion del player
     float Rotation;
@@ -43,19 +43,29 @@ public class PlayerManager : MonoBehaviour
         inputActions.Player.Rotate.canceled += _ => Rotation = 0f;
     }
 
-    private void Update()
+    private void Shoot()
     {
+        throw new NotImplementedException();
+    }
+
+    private void CheckLimits()
+    {
+        float limitsX = 14;
+        float limitsY = 5; 
+
+
         if (CheckLimits() == true)
         {
             MovePlayer();
         }
 
-        bool CheckLimits()
-        {
-            bool inLimit = true;
 
-            return inLimit;
-        }
+            bool CheckLimits()
+            {
+                bool inLimit = true;
+
+                return inLimit;
+            }
 
         void Shoot()
         {
@@ -84,14 +94,23 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         MovePlayer();
-
     }
 
 
     void MovePlayer()
 
     {
-        transform.Translate(Vector3.right * desplSpeed * Time.deltaTime);
+        if (CheckLimitsX() == true)
+        {
+            Vector3 desplx = Vector3.right * desplSpeed * Time.deltaTime * MoveX;
+            transform.Translate(desplx,Space.World);
+        }
+        if (CheckLimitsY() == true)
+        {
+            Vector3 desplx = Vector3.right * desplSpeed * Time.deltaTime * MoveX;
+            transform.Translate(desplx, Space.World);
+        }
+            transform.Translate(Vector3.right * desplSpeed * Time.deltaTime);
 
         transform.Translate(Vector3.up * desplSpeed * Time.deltaTime);
 
@@ -101,4 +120,17 @@ public class PlayerManager : MonoBehaviour
 
         transform.Translate(Vector3.forward * rotationSpeed * Time.deltaTime * 360f);
     }
+
+    bool CheckLimitsX()
+    {
+        bool inLimit = true;
+        return inLimit;
+    }
+
+    bool CheckLimitsY()
+    {
+        bool inLimit = true;
+        return inLimit;
+    }
+
 }
