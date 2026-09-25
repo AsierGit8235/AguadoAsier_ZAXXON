@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     float speed;
-    float mySpeed = 40f;
+    [SerializeField] float mySpeed = 40f;
 
     PlayerManager playerManager;
 
