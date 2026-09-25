@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    float speed; 
+    float speed;
+    float mySpeed = 40f;
 
     PlayerManager playerManager;
 
@@ -10,13 +11,13 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
-        playerManager = playerGO.GetComponent<PlayerManager>(); 
+        playerManager = playerGO.GetComponent<PlayerManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        speed = playerManager.moveSpeed;
+        speed = playerManager.moveSpeed + mySpeed;
         transform.Translate(Vector3.back * Time.deltaTime * speed);
     }
 }
