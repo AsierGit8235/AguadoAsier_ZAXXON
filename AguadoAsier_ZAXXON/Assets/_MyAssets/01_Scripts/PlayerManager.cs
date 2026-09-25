@@ -46,6 +46,8 @@ public class PlayerManager : MonoBehaviour
 
         inputActions.Player.Rotate.performed += ctx => Rotate = ctx.ReadValue<float>();
         inputActions.Player.Rotate.canceled += _ => Rotate = 0f;
+
+        moveSpeed = 36f;
     }
 
     private void Shoot()
@@ -91,7 +93,7 @@ public class PlayerManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        moveSpeed = 36f;
+       
         desplSpeed = 6f;
     }
 
@@ -99,6 +101,7 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         MovePlayer();
+        RotatePlayer(); 
     }
 
 
