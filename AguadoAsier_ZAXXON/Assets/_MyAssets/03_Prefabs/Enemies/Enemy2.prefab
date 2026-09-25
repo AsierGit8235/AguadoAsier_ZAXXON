@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ce637e71db4454bb80273fcdb5e4fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  mySpeed: 55
+  mySpeed: 50
 --- !u!1 &8374892701947220046
 GameObject:
   m_ObjectHideFlags: 0
