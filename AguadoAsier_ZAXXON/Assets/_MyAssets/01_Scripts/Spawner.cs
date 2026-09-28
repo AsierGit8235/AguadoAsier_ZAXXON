@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour
         float posX = Random.Range(-100f, 100f);
         float posY = Random.Range(1f, 30f);
         Vector3 pos = new Vector3(posX, posY, transform.position.z - offsetZ);
-        int randomKey = Random.Range(0, enemies.Length);
-        Instantiate(enemies[randomKey], pos, Quaternion.identity);
+        int random = Random.Range(0, enemies.Length);
+        Instantiate(enemies[random], pos, Quaternion.identity);
     }
     }
