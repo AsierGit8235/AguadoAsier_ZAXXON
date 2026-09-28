@@ -521,7 +521,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1200
+  far clip plane: 50000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d6d4eee965e7046beff716dde95ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  enemy: {fileID: 1498416428}
+  enemies: []
   interval: 0.5
   firstEnemyPositionZ: 200
   distanceBetweenEnemies: 25
@@ -795,7 +795,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d6d4eee965e7046beff716dde95ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  enemy: {fileID: 734449989}
+  enemies:
+  - {fileID: 1498416428}
+  - {fileID: 734449989}
   interval: 0.5
   firstEnemyPositionZ: 400
   distanceBetweenEnemies: 15
@@ -951,6 +953,8 @@ MonoBehaviour:
   moveSpeed: 0
   desplSpeed: 0
   smoothTime: 0.4
+  limitsX: 18
+  limitsY: 4
 --- !u!4 &1332455367
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -33,6 +34,10 @@ public class PlayerManager : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     Vector3 currentRot;
 
+    //límites movimiento
+    [SerializeField] float limitsX = 18f;
+    [SerializeField] float limitsY = 4f;
+
     private void Awake()
     {
         inputActions = new MyInputActions();
@@ -54,8 +59,8 @@ public class PlayerManager : MonoBehaviour
 
     private void CheckLimits()
     {
-        float limitsX = 14f;
-        float limitsY = 5f; 
+        float limitsX = 18f;
+        float limitsY = 4f; 
 
 
     }
