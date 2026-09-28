@@ -8,8 +8,11 @@ public class Spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     //enemigos intermedios
-    [SerializeField] float firstEnemyPositionZ = 300f;
+    [SerializeField] float firstEnemyPositionZ = 500f;
     [SerializeField] float distanceBetweenEnemies = 15f;
+
+    //PlayerManager
+    [SerializeField] PlayerManager playerManager;
     void Start()
     {
        StartCoroutine("SpawnEnemy");
@@ -25,6 +28,7 @@ public class Spawner : MonoBehaviour
         {
 
             SacarEnemigo(firstEnemyOffset);
+            firstEnemyOffset -= distanceBetweenEnemies;
 
         }
     }
@@ -34,7 +38,7 @@ public class Spawner : MonoBehaviour
         while (true)
         {
            SacarEnemigo(0f);
-
+            interval = distanceBetweenEnemies / playerManager.moveSpeed;
             yield return new WaitForSeconds(interval);
         }
         
@@ -45,6 +49,6 @@ public class Spawner : MonoBehaviour
         float posX = Random.Range(-100f, 100f);
         float posY = Random.Range(1f, 30f);
         Vector3 pos = new Vector3(posX, posY, transform.position.z - offsetZ);
-        Instantiate(enemy, transform.position, Quaternion.identity);
+        Instantiate(enemy, pos, Quaternion.identity);
     }
     }
