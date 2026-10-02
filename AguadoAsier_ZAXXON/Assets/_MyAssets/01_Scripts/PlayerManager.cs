@@ -35,8 +35,9 @@ public class PlayerManager : MonoBehaviour
     Vector3 currentRot;
 
     //límites movimiento
-    [SerializeField] float limitsX = 18f;
-    [SerializeField] float limitsY = 4f;
+    [SerializeField] float limitsX = 100f;
+    [SerializeField] float limitsUp = 50f;
+    [SerializeField] float limitsDown = 0f;
 
     private void Awake()
     {
@@ -54,15 +55,6 @@ public class PlayerManager : MonoBehaviour
         inputActions.Player.Rotate.canceled += _ => rotate = 0f;
 
         moveSpeed = 25f;
-    }
-
-
-    private void CheckLimits()
-    {
-        float limitsX = 18f;
-        float limitsY = 4f; 
-
-
     }
 
     void Shoot()
@@ -130,14 +122,46 @@ public class PlayerManager : MonoBehaviour
 
     bool CheckLimitsX()
     {
-        bool inLimit = true;
-        return inLimit;
+        bool inLimitX = true;
+
+        float posX = transform.position.x;
+
+        if (posX > limitsX && moveX > 0)
+        {
+            inLimitX = false;
+        }
+        else if (posX < -limitsX && moveX < 0)
+        {
+            inLimitX = false;
+        }
+        else
+        {
+            inLimitX = true;
+        }
+
+        return inLimitX;
     }
 
     bool CheckLimitsY()
     {
-        bool inLimit = true;
-        return inLimit;
+        bool inLimitY = true;
+
+        float posY = transform.position.y;
+
+        if (posY > limitsUp && moveY > 0)
+        {
+            inLimitY = false;
+        }
+        else if (posY < limitsDown && moveY < 0)
+        {
+            inLimitY = false;
+        }
+        else
+        {
+            inLimitY = true;
+        }
+
+        return inLimitY;
     }
 
 }
