@@ -115,15 +115,15 @@ public class PlayerManager : MonoBehaviour
 
     void RotatePlayer()
     {
-        transform.Rotate(Vector3.forward * -rotate * rotationSpeed * Time.deltaTime * 360, Space.Self);
-        /*
+        //transform.Rotate(Vector3.forward * -rotate * rotationSpeed * Time.deltaTime * 360, Space.Self);
+        
         transform.eulerAngles = Vector3.forward * -maxRotation * moveX;
         Vector3 vectorRotZ = Vector3.forward * -60f * moveX;
         Vector3 vectorRotX = Vector3.right * -30f * moveY;
         Vector3 vectorRot = vectorRotX + vectorRotZ;
         currentRot = Vector3.SmoothDamp(currentRot, vectorRot, ref velocity, smoothTime);
         transform.eulerAngles = currentRot;
-        */
+        
     }
 
     bool CheckLimitsX()
