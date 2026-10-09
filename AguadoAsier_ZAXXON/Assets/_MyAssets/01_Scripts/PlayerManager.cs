@@ -64,22 +64,36 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy1"))
+        string otherTag = other.gameObject.tag;
+        if (otherTag == "Enemy1" || otherTag == "Enemy2")
         {
-            Destroy(other.gameObject);
             Die();
-        }
-        else if (other.CompareTag("Enemy2"))
-        {
-            Destroy(other.gameObject);
-            Die();
-        }
-    }
+            if (other.gameObject.CompareTag("Enemy1"))
+                if (other.gameObject.tag == "Enemy1")
 
-    void Die()
-    {
-        alive = false;
-        moveSpeed = 0;
+                    if (otherTag == "Enemy1")
+                    {
+                        Destroy(other.gameObject);
+
+                    }
+
+            Die();
+            if (other.gameObject.CompareTag("Enemy2"))
+                if (other.gameObject.tag == "Enemy2")
+
+                    if (otherTag == "Enemy2")
+                    {
+
+                        Destroy(other.gameObject);
+
+                    }
+        }
+
+        void Die()
+        {
+            alive = false;
+            moveSpeed = 0;
+        }
     }
 
     private void OnEnable()
