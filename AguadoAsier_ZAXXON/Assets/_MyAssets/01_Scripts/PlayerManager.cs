@@ -61,6 +61,27 @@ public class PlayerManager : MonoBehaviour
     {
         print("PUUUUUM");
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy1"))
+        {
+            Destroy(other.gameObject);
+            Die();
+        }
+        else if (other.CompareTag("Enemy2"))
+        {
+            Destroy(other.gameObject);
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        alive = false;
+        moveSpeed = 0;
+    }
+
     private void OnEnable()
     {
         inputActions.Enable();
