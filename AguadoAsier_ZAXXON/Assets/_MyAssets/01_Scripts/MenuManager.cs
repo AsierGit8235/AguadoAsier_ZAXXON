@@ -1,16 +1,20 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void AbrirJuego()
     {
-        
+        SceneManager.LoadScene("Aguado Asier_ZAXXON");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void VolverMenu()
     {
-        
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void SalirJuego()
+    {
+        Application.Quit();
     }
 }
